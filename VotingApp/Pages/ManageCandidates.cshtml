@@ -1,0 +1,45 @@
+﻿@page
+@model VotingApp.Pages.ManageCandidatesModel
+@{
+    ViewData["Title"] = "Manage Candidates";
+}
+
+<h2>Manage Candidates</h2>
+
+
+<form class="form-inline" method="post">
+    <div class="form-group mb-2">
+        
+        <input type="text" name="CandidateName" class="form-control" placeholder="Candidate Name" required />
+        
+    </div>
+   
+    <button type="submit" class="btn btn-primary btn-sm mb-2">Add Candidate</button>
+    
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Votes</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var candidate in Model.Candidates)
+        {
+            <tr>
+                <td>@candidate.CandidateId</td>
+                <td>@candidate.Name</td>
+                <td>@candidate.Votes</td>
+                <td>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@candidate.CandidateId">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,41 @@
+﻿@page
+@model VotingApp.Pages.ManageVotersModel
+@{
+    ViewData["Title"] = "Manage Voters";
+}
+
+<h2>Manage Voters</h2>
+
+
+
+<form class="form-inline" method="post">
+    <div class="form-group mb-2">
+        <input type="text"  class="form-control" name="VoterName" placeholder="Voter Name" required />
+    </div>
+    <button type="submit" class="btn btn-primary btn-sm mb-2">Add Voter</button>
+</form>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Has Voted</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var voter in Model.Voters)
+        {
+            <tr>
+                <td>@voter.VoterId</td>
+                <td>@voter.Name</td>
+                <td>@voter.HasVoted</td>
+                <td>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@voter.VoterId">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
